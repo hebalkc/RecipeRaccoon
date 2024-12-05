@@ -1,0 +1,70 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeRaccoon.Pages.HomePage"
+             x:Name="RootPage"
+             BackgroundColor="#F4EAD5">
+
+    <!-- Set the BackgroundColor of the page if needed -->
+    <ContentPage.Content>
+        <Grid>
+            <!-- Fullscreen App Logo -->
+            <Image Source="logo.png"
+                   Aspect="AspectFill"
+                   VerticalOptions="Start"
+                   HorizontalOptions="FillAndExpand"
+                   HeightRequest="200"/>
+
+            <ScrollView Margin="0,215,0,0">
+                <!-- Push content down -->
+                <VerticalStackLayout Padding="20" Spacing="15">
+                    <!-- Ingredient Input -->
+                    <Entry x:Name="IngredientEntry"
+                           Placeholder="Enter ingredient (seperate with commas)"
+                           BackgroundColor="#F4EAD5"
+                           HeightRequest="40"
+                           FontSize="16"
+                           Margin="0,0,0,10"/>
+
+                    <!-- Search Button -->
+                    <Button Text="Find Recipes"
+                            BackgroundColor="#804E31"
+                            TextColor="White"
+                            FontSize="18"
+                            Clicked="OnSearchClicked"/>
+
+                    <!-- Recipe List -->
+                    <CollectionView x:Name="RecipeCollection" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="0" Margin="10" CornerRadius="12" HasShadow="True" BackgroundColor="#804D31">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                    Command="{Binding Source={x:Reference RootPage}, Path=CardTappedCommand}" 
+                                    CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
+                                    <VerticalStackLayout>
+                                        <!-- Image with Rounded Corners -->
+                                        <Frame Padding="0" CornerRadius="12" IsClippedToBounds="True">
+                                            <Image Source="{Binding ImageUrl}" 
+                                       HeightRequest="150" 
+                                       Aspect="AspectFill" />
+                                        </Frame>
+
+                                        <!-- Recipe Title -->
+                                        <Label Text="{Binding Title}" 
+                                   TextColor="White"
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   Margin="10,5,10,10" 
+                                   LineBreakMode="WordWrap" 
+                                   HorizontalOptions="Start" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,89 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeRaccoon.Pages.RecipeDetailsPage"
+             BackgroundColor="#F4EAD5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0">
+            <!-- Remove padding and spacing for the logo -->
+
+            <!-- App Logo -->
+            <Image Source="logo.png" 
+                   Aspect="AspectFill" 
+                HeightRequest="100"
+                   HorizontalOptions="FillAndExpand" />
+                <!-- Ensure it stretches side to side -->
+
+                <!-- Recipe Image -->
+            <Label Text="{Binding Title}"
+                FontSize="30"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                TextColor="#804E31"
+                Margin="10,10,10,5" />
+            <Frame CornerRadius="10" IsClippedToBounds="True" Margin="10,10,10,10">
+            <!-- Keep margin for the image -->
+                <Image Source="{Binding ImageUrl}" 
+                Aspect="AspectFill"
+                 HeightRequest="200" />
+            </Frame>
+            <Button Text="Back"
+                    BackgroundColor="#DEAA47"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="40"
+                    WidthRequest="100"
+                    CornerRadius="20"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    Margin="10"
+                    Clicked="OnBackClicked" />
+            <!-- Ingredients Section -->
+                <Label Text="Ingredients"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#804E31"
+                   Margin="10,10,10,5" />
+                <!-- Keep padding for the sections -->
+                <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="10,0,10,10">
+                    <CollectionView ItemsSource="{Binding Ingredients}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Image Source="checkmark.png" HeightRequest="20" WidthRequest="20" />
+                                    <Label Text="{Binding}" FontSize="16" TextColor="#4B4B4B" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+
+                <!-- Instructions Section -->
+                <Label Text="Instructions"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#804E31"
+                   Margin="10,10,10,5" />
+                <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="10,0,10,10">
+                    <CollectionView ItemsSource="{Binding Steps}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,0,0,10">
+                                    <Label Text="{Binding Number, StringFormat='Step {0}'}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold"
+                                       TextColor="#4B4B4B" />
+                                    <Label Text="{Binding Step}" 
+                                       FontSize="14" 
+                                       TextColor="#4B4B4B" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
